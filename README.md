@@ -14,3 +14,4 @@ For now, the box accepts any JSON data, but the page will only work with data fo
 `
 
 This will result in the following output:
+![](./doc/images/example.png)

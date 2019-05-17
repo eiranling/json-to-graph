@@ -38,7 +38,6 @@ export default class JSONGraph extends React.Component {
 
     renderGraph() {
         let data = this.convertToGraph(this.props.graph_json);
-        console.log(data);
         if (data.nodes.length) {
             return <Graph id="mainGraph" ref="mainGraph" data={data} config={graph_config}/>
         }

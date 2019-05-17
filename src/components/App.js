@@ -10,7 +10,8 @@ export default class App extends React.Component {
         super(props);
         this.state = {
             json_valid: true,
-            json: {}
+            json: {},
+            message: "The JSON is invalid"
         }
     }
 
@@ -18,14 +19,14 @@ export default class App extends React.Component {
         try {
             this.setState({json: JSON.parse(event.target.value), json_valid: true});
         } catch (error) {
-            this.setState({json_valid: false});
+            this.setState({json_valid: false, message:error.message});
         }
     };
 
     render() {
         return (
             <div className="App">
-                <ErrorBar show={!this.state.json_valid} message="The json provided is invalid"/>
+                <ErrorBar show={!this.state.json_valid} message={this.state.message}/>
                 <div className="App standard full">
                     <DataForm onJsonChange={this.onChange}/>
                     <JSONGraph graph_json={this.state.json} />

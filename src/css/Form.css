@@ -1,27 +1,4 @@
-.left {
-    align-self: flex-start;
-}
-
-.quarter {
-    width: 25%;
-}
-
-.full {
-    height: 100%;
-}
-
 .form {
     border: 1px solid #CCCCCC;
     border-radius: 4px;
-}
-
-.shadowed {
-    -webkit-box-shadow: 0 0 10px -5px rgba(0,0,0,0.75);
-    -moz-box-shadow: 0 0 10px -5px rgba(0,0,0,0.75);
-    box-shadow: 0 0 10px -3px rgba(0,0,0,0.75);
-}
-
-.standard {
-    margin: 8px;
-    padding: 4px;
 }

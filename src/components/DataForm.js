@@ -13,12 +13,14 @@ export default class DataForm extends React.Component {
                     href = "https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
                     integrity = "sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
                     crossOrigin = "anonymous"/>
-                <Form>
-                    <Form.Group controlId="dataForm.JsonDataArea" >
-                        <Form.Label>Enter JSON data here</Form.Label>
-                        <Form.Control as="textarea" rows="30" onChange={this.props.onJsonChange}/>
-                    </Form.Group>
-                </Form>
+                    <div className="fill-width">
+                        <Form>
+                            <Form.Group controlId="dataForm.JsonDataArea" >
+                                <Form.Label>Enter JSON data here</Form.Label>
+                                <Form.Control as="textarea" rows="30" onChange={this.props.onJsonChange}/>
+                            </Form.Group>
+                        </Form>
+                    </div>
             </div>
         )
     }

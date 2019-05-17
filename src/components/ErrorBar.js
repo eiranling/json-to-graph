@@ -5,7 +5,7 @@ import '../css/common.css'
 export default class ErrorBar extends React.Component {
     render() {
         return (
-            this.show.props && <div className="errorContainer top">{this.props.message}</div>
+            this.props.show && <div className="errorContainer top">{this.props.message}</div>
         )
     }
 }

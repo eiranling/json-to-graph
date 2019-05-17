@@ -1,7 +1,7 @@
 import React from 'react';
 import '../css/App.css';
 import DataForm from "./DataForm";
-import Graph from "./Graph";
+import JSONGraph from "./JSONGraph";
 import ErrorBar from "./ErrorBar";
 
 export default class App extends React.Component {
@@ -14,16 +14,22 @@ export default class App extends React.Component {
         }
     }
 
-    onChange(value) {
-
-    }
+    onChange = (event) => {
+        try {
+            this.setState({json: JSON.parse(event.target.value), json_valid: true});
+        } catch (error) {
+            this.setState({json_valid: false});
+        }
+    };
 
     render() {
         return (
             <div className="App">
                 <ErrorBar show={!this.state.json_valid} message="The json provided is invalid"/>
-                <DataForm onJsonChanged={this.onChange}/>
-                <Graph graph_json={this.state.json} />
+                <div className="App standard full">
+                    <DataForm onJsonChange={this.onChange}/>
+                    <JSONGraph graph_json={this.state.json} />
+                </div>
             </div>
         );
     }

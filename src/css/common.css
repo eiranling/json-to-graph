@@ -7,10 +7,12 @@
 .standard {
     margin: 8px;
     padding: 4px;
+    display: flex;
 }
 
 .left {
     align-self: flex-start;
+    float: left;
 }
 
 .quarter {
@@ -18,9 +20,27 @@
 }
 
 .full {
-    height: 100%;
+    height: 90vh;
 }
 
 .top {
     vertical-align: top;
+}
+
+.right {
+    align-self: flex-end;
+    float: right;
+}
+
+.fill-width {
+    flex-grow: 1;
+}
+
+.fill-height {
+    height: 100%;
+}
+
+
+.three-quarter {
+    width: 75%;
 }

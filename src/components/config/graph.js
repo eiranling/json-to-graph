@@ -51,7 +51,7 @@ const graph_config = {
         "labelProperty": "label",
         "mouseCursor": "pointer",
         "opacity": 1,
-        "renderLabel": false,
+        "renderLabel": true,
         "semanticStrokeWidth": false,
         "strokeWidth": 1.5
     }

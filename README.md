@@ -29,3 +29,4 @@ The app also allows the handling of custom labels and weights to specify this, u
     }
 }
 ```
+![](./doc/images/example2.png)

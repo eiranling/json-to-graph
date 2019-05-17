@@ -1,0 +1,6 @@
+.errorContainer {
+    background-color: crimson;
+    padding: 16px;
+    border-radius: 4px;
+    text-decoration-color: white;
+}

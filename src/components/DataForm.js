@@ -1,6 +1,7 @@
 import React from 'react'
 import Form from "react-bootstrap/Form";
 import '../css/Form.css'
+import '../css/common.css'
 
 export default class DataForm extends React.Component {
 
@@ -15,7 +16,7 @@ export default class DataForm extends React.Component {
                 <Form>
                     <Form.Group controlId="dataForm.JsonDataArea" >
                         <Form.Label>Enter JSON data here</Form.Label>
-                        <Form.Control as="textarea" rows="30"/>
+                        <Form.Control as="textarea" rows="30" onChange={this.props.onJsonChange}/>
                     </Form.Group>
                 </Form>
             </div>

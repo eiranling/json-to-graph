@@ -1,9 +1,28 @@
 import React from 'react'
 import Form from "react-bootstrap/Form";
+import Editor from 'react-simple-code-editor'
+import Prism from 'prismjs';
 import '../css/Form.css'
 import '../css/common.css'
+import Col from "react-bootstrap/Col";
+import 'prismjs/components/prism-json'
+import 'prismjs/components/prism-yaml'
+
 
 export default class DataForm extends React.Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            language: Prism.languages.json,
+            value: ""
+        }
+    }
+
+    changeLang(event) {
+        this.setState({language: event.target.value});
+        this.props.onLanguageChange(event)
+    }
 
 
     render() {
@@ -16,8 +35,22 @@ export default class DataForm extends React.Component {
                     <div className="fill-width">
                         <Form>
                             <Form.Group controlId="dataForm.JsonDataArea" >
-                                <Form.Label>Enter JSON data here</Form.Label>
-                                <Form.Control as="textarea" rows="30" onChange={this.props.onJsonChange}/>
+                                <Form.Row>
+                                    <Col>
+                                        <Form.Label>Enter data here</Form.Label>
+                                    </Col>
+                                    <Col>
+                                        <Form.Control as="select" onChange={this.changeLang}>
+                                            <option>JSON</option>
+                                            <option>YAML</option>
+                                        </Form.Control>
+                                    </Col>
+                                </Form.Row>
+                                <Editor className="fill-width standard full form"
+                                        style={{fontFamily: '"Fira code", "Fira Mono", monospace', fontSize: 12 }}
+                                    value={this.state.value}
+                                    onValueChange={this.props.onDataChange}
+                                    highlight={code => Prism.highlight(code, this.state.language)} />
                             </Form.Group>
                         </Form>
                     </div>

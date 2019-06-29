@@ -7,7 +7,26 @@
 .standard {
     margin: 8px;
     padding: 4px;
+}
+
+.horizontal-container {
     display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: stretch;
+}
+
+.vertical-container {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: stretch;
+}
+
+.primary_container {
+    flex-grow: 1;
 }
 
 .left {
@@ -42,5 +61,5 @@
 
 
 .three-quarter {
-    width: 75%;
+    width: 70%;
 }

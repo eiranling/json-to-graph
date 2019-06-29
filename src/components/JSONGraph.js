@@ -3,7 +3,7 @@ import {Graph} from 'react-d3-graph'
 import '../css/common.css'
 import '../css/graph.css'
 import graph_config from './config/graph'
-import {isArray, isObject} from "../util/utility";
+import {isArray, isObject, matchesColorHex} from "../util/utility";
 
 
 export default class JSONGraph extends React.Component {
@@ -12,12 +12,7 @@ export default class JSONGraph extends React.Component {
         let link = {source: source, target: target};
         link.label = "label" in options ? options.label : "";
 
-        if ("weight" in options) {
-            console.log("detected weight");
-            link.strokeWidth = options.weight;
-        }
-
-        console.log(link);
+        if ("weight" in options) link.strokeWidth = options.weight;
 
         return link;
     }
@@ -27,7 +22,6 @@ export default class JSONGraph extends React.Component {
         for (let connection in connections) {
             if (connections.hasOwnProperty(connection)) {
                 let link = {source: from, target: connection};
-                console.log(connections[connection]);
                 if (isObject(connections[connection])) {
                     link = this.generateLinkWithOptions(from, connection, connections[connection]);
                 }
@@ -56,18 +50,30 @@ export default class JSONGraph extends React.Component {
 
     convertToGraph(items) {
         let graph = {nodes: [], links: []};
+        console.log(items);
         for (let node in items) {
-            if (items.hasOwnProperty(node)) {
+            if (items.hasOwnProperty(node) && isObject(items[node])) {
+                if (items[node].hasOwnProperty("connections")) {
+                    graph.links = [...graph.links, ...this.generateConnectedItems(node, items[node]["connections"])];
+                    graph.links.forEach((item) => {
+                        if (!graph.nodes.map((item) => item.id).includes(item.source)) {
+                            graph.nodes.push({id: item.source});
+                        }
 
-                graph.links = [...graph.links, ...this.generateConnectedItems(node, items[node])];
-                graph.links.forEach((item) => {
-                    if (!graph.nodes.map((item) => item.id).includes(item.source))  {
-                        graph.nodes.push({id: item.source})
-                    }
-                    if (!graph.nodes.map((item) => item.id).includes(item.target))  {
-                        graph.nodes.push({id: item.target})
-                    }
-                });
+                        if (!graph.nodes.map((item) => item.id).includes(item.target)) {
+                            graph.nodes.push({id: item.target});
+                        }
+                    });
+                }
+
+                if (!graph.nodes.map((item) => item.id).includes(node)) {
+                    graph.nodes.push({id: node});
+                }
+
+                if ("colour" in items[node]) {
+                    let targetNode = graph.nodes.filter((item) => item.id === node);
+                    if (targetNode.length) targetNode[0].color = items[node]["colour"];
+                }
             }
         }
         graph.links = graph.links.filter((value, index, self) => {
@@ -86,7 +92,7 @@ export default class JSONGraph extends React.Component {
 
     render() {
         return (
-            <div className="fill-width fill-height standard">
+            <div className="fill-width fill-height standard horizontal-container right three-quarter">
                 {this.renderGraph()}
 
             </div>

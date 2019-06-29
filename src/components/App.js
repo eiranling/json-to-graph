@@ -28,7 +28,6 @@ export default class App extends React.Component {
     parseYaml(string) {
         try {
             let jsonString = yaml.safeLoad(string, {json: true});
-            console.log('yamlconversion = '+jsonString);
             this.setState({json: jsonString, json_valid: true});
         } catch (error) {
             this.setState({json_valid: false, message:error.message});
@@ -36,7 +35,6 @@ export default class App extends React.Component {
     }
 
     parseJson(string) {
-        console.log('json:' + string);
         try {
             this.setState({json: JSON.parse(string), json_valid: true});
         } catch (error) {
@@ -45,14 +43,15 @@ export default class App extends React.Component {
     }
 
     changeLanguage = (event) => {
-        this.setState({language: event.target.value})
+        this.setState({language: event.target.value});
+        this.onChange(event.target.value);
     };
 
     render() {
         return (
             <div className="App">
                 <ErrorBar show={!this.state.json_valid} message={this.state.message}/>
-                <div className="App standard full">
+                <div className="App standard horizontal-container full">
                     <DataForm onDataChange={this.onChange} onLanguageChange={this.changeLanguage}/>
                     <JSONGraph graph_json={this.state.json} />
                 </div>

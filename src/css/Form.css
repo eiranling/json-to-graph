@@ -2,3 +2,7 @@
     border: 1px solid #CCCCCC;
     border-radius: 4px;
 }
+
+.CodeMirror {
+    text-align: left!important;
+}

@@ -1,12 +1,13 @@
 import React from 'react'
 import Form from "react-bootstrap/Form";
-import Editor from 'react-simple-code-editor'
+import { UnControlled as CodeMirror } from 'react-codemirror2'
 import Prism from 'prismjs';
 import '../css/Form.css'
 import '../css/common.css'
 import Col from "react-bootstrap/Col";
-import 'prismjs/components/prism-json'
-import 'prismjs/components/prism-yaml'
+import 'prismjs/components/prism-javascript'
+import 'prismjs/components/prism-json';
+import 'prismjs/components/prism-yaml';
 
 
 export default class DataForm extends React.Component {
@@ -16,14 +17,20 @@ export default class DataForm extends React.Component {
         this.state = {
             language: Prism.languages.json,
             value: ""
-        }
+        };
+
+        this.changeLang = this.changeLang.bind(this)
     }
 
     changeLang(event) {
-        this.setState({language: event.target.value});
+        this.setState({language: Prism.languages.json});
         this.props.onLanguageChange(event)
     }
 
+    changeValue(string) {
+        this.setState({value: string});
+        this.props.onDataChange(string);
+    }
 
     render() {
         return (
@@ -46,11 +53,7 @@ export default class DataForm extends React.Component {
                                         </Form.Control>
                                     </Col>
                                 </Form.Row>
-                                <Editor className="fill-width standard full form"
-                                        style={{fontFamily: '"Fira code", "Fira Mono", monospace', fontSize: 12 }}
-                                    value={this.state.value}
-                                    onValueChange={this.props.onDataChange}
-                                    highlight={code => Prism.highlight(code, this.state.language)} />
+
                             </Form.Group>
                         </Form>
                     </div>

@@ -41,7 +41,7 @@ export default class DataForm extends React.Component {
 
     render() {
         return (
-            <div className="left quarter full form shadowed standard vertical-container">
+            <div className="left quarter form shadowed standard vertical-container">
                 <link rel = "stylesheet"
                     href = "https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
                     integrity = "sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"

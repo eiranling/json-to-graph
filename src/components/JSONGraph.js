@@ -33,7 +33,7 @@ export default class JSONGraph extends React.Component {
 
     generateConnectionsFromArray(from, connections) {
         let edges = [];
-        connections.forEach((item) => edges.push({source: from, target: item}));
+        connections.forEach((item) => { if (item) edges.push({source: from, target: item}) });
         return edges;
     }
 
@@ -50,7 +50,6 @@ export default class JSONGraph extends React.Component {
 
     convertToGraph(items) {
         let graph = {nodes: [], links: []};
-        console.log(items);
         for (let node in items) {
             if (items.hasOwnProperty(node) && isObject(items[node])) {
                 if (items[node].hasOwnProperty("connections")) {
